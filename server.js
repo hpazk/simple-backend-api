@@ -15,7 +15,7 @@ app.post('/api/services', (req, res) => {
         return res.status(400).json({ error: 'Name is required' });
     }
 
-    const query = 'INSERT INTO names (name) VALUES (?)';
+    const query = 'INSERT INTO services (name, url, category_id, owner) VALUES (?)';
     connection.query(query, [name], (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Error saving name' });
@@ -24,8 +24,8 @@ app.post('/api/services', (req, res) => {
     });
 });
 
-app.get('/api/names', (req, res) => {
-    const query = 'SELECT * FROM names';
+app.get('/api/services', (req, res) => {
+    const query = 'SELECT * FROM services';
     connection.query(query, (err, results) => {
         if (err) {
             return res.status(500).json({ error: 'Error fetching names' });
